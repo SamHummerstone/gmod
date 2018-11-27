@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM ubuntu:xenial
 
 MAINTAINER Sam Hummerstone "sjhummerstone@gmail.com"
 
@@ -36,9 +36,11 @@ RUN apt-get update && apt-get install -y mailutils \
 WORKDIR /linuxgsm
 RUN curl -L --output linuxgsm.sh https://linuxgsm.sh
 RUN chmod +x linuxgsm.sh
-RUN useradd gmodserver
+RUN useradd -m gmodserver
 RUN chown gmodserver .
 USER gmodserver
 RUN ./linuxgsm.sh gmodserver
 RUN ./gmodserver auto-install
 
+EXPOSE 27015 27005
+# CMD ["./gmodserver", "start"]
