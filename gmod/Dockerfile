@@ -7,8 +7,8 @@ MAINTAINER Sam Hummerstone "sjhummerstone@gmail.com"
 # 
 
 RUN dpkg --add-architecture i386
-RUN apt-get update
-RUN apt-get install -y mailutils \
+RUN cat /etc/apt/sources.list
+RUN apt-get update && apt-get install -y mailutils \
 				postfix \
 				curl \
 				wget \
@@ -22,7 +22,7 @@ RUN apt-get install -y mailutils \
 				ca-certificates \
 				binutils \
 				bc \
-				# jq \
+				jq \
 				tmux \
 				lib32gcc1 \
 				libstdc++6 \
@@ -40,4 +40,5 @@ RUN useradd gmodserver
 RUN chown gmodserver .
 USER gmodserver
 RUN ./linuxgsm.sh gmodserver
-RUN ./gmodserver instal
+RUN ./gmodserver auto-install
+
