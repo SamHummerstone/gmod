@@ -42,5 +42,7 @@ USER gmodserver
 RUN ./linuxgsm.sh gmodserver
 RUN ./gmodserver auto-install
 
+USER root
+RUN apt-get install vim -y
 EXPOSE 27015 27005
 # CMD ["./gmodserver", "start"]
