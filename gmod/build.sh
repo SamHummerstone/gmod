@@ -1,1 +1,1 @@
-docker build -t sjhummerstone/gmod-server .
+docker build -t gmod .
