@@ -10,6 +10,7 @@ RUN dpkg --add-architecture i386
 RUN cat /etc/apt/sources.list
 RUN apt-get update && apt-get install -y mailutils \
 				postfix \
+				vim \
 				curl \
 				wget \
 				file \
@@ -42,7 +43,29 @@ USER gmodserver
 RUN ./linuxgsm.sh gmodserver
 RUN ./gmodserver auto-install
 
-USER root
-RUN apt-get install vim -y
+#
+# Setup Server Config
+#
+
+RUN mkdir config
+COPY config/ ./config/
+run cat config/ttt.cfg >> lgsm/config-lgsm/gmodserver/common.cfg
+
+#
+# Install workshop collection
+#
+
+RUN echo """\
+ip=192.168.1.108 \
+wsapikey=<redacted> \
+wscollectionid=1514955900 \
+""" > lgsm/config-lgsm/gmodserver/gmodserver.cfg
+
 EXPOSE 27015 27005
-# CMD ["./gmodserver", "start"]
+
+CMD ["/bin/bash"]
+
+
+
+
+
