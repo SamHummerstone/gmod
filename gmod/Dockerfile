@@ -56,7 +56,7 @@ run cat config/ttt.cfg >> lgsm/config-lgsm/gmodserver/common.cfg
 #
 
 RUN echo """\
-ip=192.168.1.108 \
+ip=0.0.0.0 \
 wsapikey=<redacted> \
 wscollectionid=1514955900 \
 """ > lgsm/config-lgsm/gmodserver/gmodserver.cfg
